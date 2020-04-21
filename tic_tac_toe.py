@@ -1,5 +1,5 @@
 import re
-
+from alpha_beta import mini_max_ab, is_game_over
 _PLAYER = "player"
 _MACHINE = "machine"
 
@@ -13,8 +13,8 @@ class TicTacToeGame():
     self.is_game_over = False
     self.winner = None
 
-  def is_over(self): # TODO: Finish this function by adding checks for a winning game (rows, columns, diagonals)
-    return self.board.count(None) == 0
+  def is_over(self):
+    return is_game_over(self.board)[0]
 
   def play(self):
     if self.turn == _PLAYER:
@@ -49,11 +49,8 @@ class TicTacToeGame():
 
     self.board[chosen_cell] = _PLAYER_SYMBOL
 
-  def machine_turn(self): # TODO: Finish this function by making the machine choose a random cell (use random module)
-    for i, cell in enumerate(self.board):
-      if cell is None:
-        self.board[i] = _MACHINE_SYMBOL
-        break
+  def machine_turn(self): # TODO: Use your minimax alpha beta pruning algorithm here to set the machines turn
+    pass
 
   def format_board(self):
     row0 = "|".join(list(map(lambda c: " " if c is None else c, self.board[0:3])))
@@ -67,5 +64,5 @@ class TicTacToeGame():
     print(self.format_board())
     print()
 
-  def print_result(self): # TODO: Finish this function in order to print the result based on the *winner*
-    pass
+  def print_result(self):
+    print(f"{_PLAYER if is_game_over(self.board)[1] == _PLAYER_SYMBOL else _MACHINE} wins!")
