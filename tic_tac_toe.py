@@ -65,4 +65,7 @@ class TicTacToeGame():
     print()
 
   def print_result(self):
-    print(f"{_PLAYER if alpha_beta.is_game_over(self.board)[1] == _PLAYER_SYMBOL else _MACHINE} wins!")
+    if(alpha_beta.is_game_over(self.board)[1] is None):
+      print("draw")
+    else:
+      print(f"{_PLAYER if alpha_beta.is_game_over(self.board)[1] == _PLAYER_SYMBOL else _MACHINE} wins!")
